@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,9 +48,8 @@ public class CategoriaController implements WebMvcConfigurer{
 	}
 	
 	@PostMapping("/categoria")
-	public Categoria postCategoria (@RequestBody Categoria objCategoria){
-		repository.save(objCategoria);
-		return objCategoria;
+	public ResponseEntity<Categoria> post (@RequestBody Categoria categoria){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
 	}
 	
 	@PutMapping("/categoria/{id}")
