@@ -19,10 +19,13 @@ public class Categoria {
 	
 	@Column
 	@Size(min = 5, max = 100)
+	private String nome;
+	
+	@Column
+	@Size(min = 5, max = 100)
+	private String descricao;
 	
 	//GETTERS AND SETTERS
-	private String categoria;
-
 	public Long getId() {
 		return id;
 	}
@@ -31,14 +34,19 @@ public class Categoria {
 		this.id = id;
 	}
 
-	public String getCategoria() {
-		return categoria;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	
-	
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 }
