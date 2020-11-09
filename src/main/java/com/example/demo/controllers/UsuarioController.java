@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,46 +15,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.models.Jogos;
-import com.example.demo.repositories.JogosRepository;
+import com.example.demo.models.Usuario;
+import com.example.demo.repositories.UsuarioRepository;
 
 @RestController
-@RequestMapping("/jogos")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-public class JogosController {
-
+@RequestMapping("/usuario")
+public class UsuarioController {
+	
 	@Autowired
-	private JogosRepository repository;
+	private UsuarioRepository repository;
 	
 	@GetMapping
-	public List<Jogos> findAllProduto(){
+	public List<Usuario> findAllUsuario(){
 		return repository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Jogos> findByIdProduto (@PathVariable Long id){
+	public Optional<Usuario> findByIdUsuario (@PathVariable Long id){
 		return repository.findById(id);
 	}
 	
-	@GetMapping("/descricao/{descricao}")
-	public ResponseEntity<List<Jogos>> findByDescricaoProduto (@PathVariable String descricao){
-		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(descricao));
-	}
-	
 	@PostMapping
-	public ResponseEntity<Jogos> postProduto (@RequestBody Jogos jogo){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(jogo));
+	public ResponseEntity<Usuario> postUsuario (@RequestBody Usuario usuario){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
 	}
 	
 	@PutMapping("/{id}")
-	public Jogos putProduto (@PathVariable Long id, @RequestBody Jogos objJogos) {
-		objJogos.setId(id);
-		repository.save(objJogos);
-		return objJogos;
+	public Usuario putUsuario (@PathVariable Long id, @RequestBody Usuario objUsuario) {
+		objUsuario.setId(id);
+		repository.save(objUsuario);
+		return objUsuario;
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteProduto (@PathVariable Long id) {
+	public void deleteUsuario (@PathVariable Long id) {
 		repository.deleteById(id);
 	}
+
 }
